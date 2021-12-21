@@ -25,7 +25,7 @@ pip install -r requirements.txt
 
 
 * ### Data file structure:
-
+```json
 {
   "nft": [
     {
