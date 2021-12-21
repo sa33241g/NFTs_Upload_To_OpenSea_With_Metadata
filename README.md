@@ -29,8 +29,8 @@ pip install -r requirements.txt
 {
   "nft": [
     {
-	  "file_path": "C:/Users/User/buildimages/1.png",	
-      "nft_name": "NFT  #1",
+      "file_path": "C:/Users/User/build/images/1.png",	
+      "nft_name": "NFT #1",
       "description": "Remember to replace this description",
       "collection": "CollectionName",
       "blockchain": "Polygon",
@@ -73,25 +73,25 @@ pip install -r requirements.txt
            },
            {
              "name": "Width",
-             "from": 1,
-             "to": 10
+             "from": 2,
+             "to": 15
            }
          ],
          "stats": [
            {
              "name": "Strenght",
-             "from": 10,
-             "to": 100
+             "from": 1,
+             "to": 10
            },
            {
              "name": "Age",
              "from": 1,
-             "to": 99
+             "to": 9
            }
          ],
-		 "unlockable_content": [
+      "unlockable_content": [
         true,
-        "Thank you!"
+        "Content"
       ],
       "explicit_and_sensitive_content": true,
       "supply": 1,
