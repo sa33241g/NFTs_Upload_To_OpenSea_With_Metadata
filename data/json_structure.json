@@ -1,0 +1,75 @@
+{
+  "nft": [
+    {
+	  "file_path": "C:/Users/User/buildimages/1.png",	
+      "nft_name": "NFT  #1",
+      "description": "Remember to replace this description",
+      "collection": "CollectionName",
+      "blockchain": "Polygon",
+      "external_link": "https://www.google.com/",
+      "properties": [
+        {
+          "type": "Background",
+          "value": "Black"
+        },
+        {
+          "type": "Eyeball",
+          "value": "White"
+        },
+        {
+          "type": "Eye color",
+          "value": "Green"
+        },
+        {
+          "type": "Iris",
+          "value": "Large"
+        },
+        {
+          "type": "Shine",
+          "value": "Shapes"
+        },
+        {
+          "type": "Bottom lid",
+          "value": "Middle"
+        },
+        {
+          "type": "Top lid",
+          "value": "Low"
+        }
+      ],
+	   "levels": [
+           {
+             "name": "Speed",
+             "from": 2,
+             "to": 5
+           },
+           {
+             "name": "Width",
+             "from": 1,
+             "to": 10
+           }
+         ],
+         "stats": [
+           {
+             "name": "Strenght",
+             "from": 10,
+             "to": 100
+           },
+           {
+             "name": "Age",
+             "from": 1,
+             "to": 99
+           }
+         ],
+		 "unlockable_content": [
+        true,
+        "Thank you!"
+      ],
+      "explicit_and_sensitive_content": true,
+      "supply": 1,
+      "blockchain": "Polygon",
+      "price": 0.005,
+      "quantity": 1
+    }
+  ]
+}
