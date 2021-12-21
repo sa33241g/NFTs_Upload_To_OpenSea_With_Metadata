@@ -6,7 +6,7 @@
 
   * Download this repository or clone it:
 ```
-git clone https://github.com/maximedrn/opensea_automatic_uploader.git
+git clone https://github.com/nftdevs/NFTs_Upload_To_OpenSea_With_Metadata.git
 ```
   * It requires [Python](https://www.python.org/) 3.7 or a newest version.
   * Install [pip](https://pip.pypa.io/en/stable/installation/) to be able to have needed Python modules.
