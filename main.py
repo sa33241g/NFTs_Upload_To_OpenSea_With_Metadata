@@ -311,7 +311,7 @@ class Opensea(object):
     def opensea_upload(self, number: int) -> None:
         """Upload multiple NFTs automatically on Opensea."""
         try:
-            print(f'Uploading NFT #{number}/{len(settings.file)}.',
+            print(f'Uploading {settings.nft_name}/{len(settings.file)}.',
                   end=' ')
             # Go to Opensea login URL.
             self.driver.get(self.create_url + '?enable_supply=true')
