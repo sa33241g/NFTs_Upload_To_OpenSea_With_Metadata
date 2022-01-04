@@ -31,7 +31,7 @@ pip install -r requirements.txt
     {
       "file_path": "C:/Users/User/build/images/1.png",	
       "nft_name": "NFT #1",
-	  "external_link": "https://www.google.com/",
+      "external_link": "https://www.google.com/",
       "description": "Remember to replace this description",
       "collection": "CollectionName",
       "properties": [
