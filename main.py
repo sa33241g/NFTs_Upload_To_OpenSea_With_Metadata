@@ -447,7 +447,6 @@ class Opensea(object):
             print(f'{green}Done.{reset}')
             # If price has been defined.
             if settings.price > 0:
-                print(settings.price)
                 self.sell_nft()  # Sell NFT.
             else:
                 print(f'{red}NFT sale cancelled.{reset}')
@@ -565,9 +564,6 @@ def data_file() -> str:
 if __name__ == '__main__':
 
     cls()  # Clear console.
-
-    print(f'{green}Made by Maxime. '
-          f'\n@Github: https://github.com/maximedrn{reset}')
 
     password = read_file('password', '\nWhat is your MetaMask password? ')
     recovery_phrase = read_file('recovery_phrase',
