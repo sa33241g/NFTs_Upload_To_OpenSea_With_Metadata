@@ -256,20 +256,27 @@ class Opensea(object):
         self.driver.switch_to.window(self.driver.window_handles[1]) \
             if self.window_handles(1) else self.retry_login(0)
         self.driver.get(self.login_url)  # Go to Opensea login URL.
+        
+        # UPDATE
+        # right navbar wallet
+        self.element_clickable('//*[@id="__next"]/div/div[1]/nav/ul/div[2]/li/button')
+
         # Click on "Metamask" button in list of wallet.
         ul = len(self.element_visible(
-            '//*[@id="__next"]/div[1]/main/div/div/div/div[2]/ul'
+            '//*[@id="__next"]/div/aside[2]/div[2]/div/div[2]/ul'
         ).find_elements_by_tag_name('li'))
         for li in range(ul):
             li += 1  # Add 1 to start li element at li[1].
             # Check if button text contains "MetaMask".
             if self.element_visible(
-                    '//*[@id="__next"]/div[1]/main/div/div/div/div[2]/ul/li'
+                    '//*[@id="__next"]/div/aside[2]/div[2]/div/div[2]/ul/li'
                     f'[{li}]/button/div[2]/span').text == 'MetaMask':
                 # Click on Metamask button.
-                self.element_clickable('//*[@id="__next"]/div[1]/main/div/div'
-                                       f'/div/div[2]/ul/li[{li}]/button')
+                self.element_clickable('//*[@id="__next"]/div/aside[2]/div[2]/div/div[2]/ul'
+                                       f'/li[{li}]/button')
                 break
+        # UPDATE
+        
         # Switch on MetaMask popup tab.
         self.driver.switch_to.window(self.driver.window_handles[2]) \
             if self.window_handles(2) else self.retry_login(0)
