@@ -488,6 +488,14 @@ class Opensea(object):
                 # Input price.
                 self.element_send_keys(
                     '//input[@name="price"]', str(settings.price))
+                    
+                
+            self.element_clickable('//*[@id="duration"]')  # Date button.
+            self.element_clickable('//*[@role="dialog"]'  # Duration Range
+                                  '/div[1]/div/div[2]/input')  # sheet.
+            self.element_clickable('//span[contains(text(), '   # Date span.
+                                  f'"1 month")]/../..')
+            self.element_send_keys('//*[@role="dialog"]', Keys.ENTER)
             # Click on "Complete listing" button.
             try:
                 self.element_clickable('//button[@type="submit"]')
