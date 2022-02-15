@@ -28,7 +28,16 @@ python3 -m pip install -r requirements.txt
   * Extract the executable from the ZIP file and copy/paste it in the `assets/` folder of the repository.
     
 
-
+* ### Run the bot:
+  * Open a command prompt in the `NFTs_Upload_To_OpenSea_With_Metadata-main/` folder path.
+  * Type one of these commands to run the bot:
+    
+    * ```
+      python main.py
+      ```
+    * ```
+      python3 main.py
+      ```
 
 * ### Data file structure:
 ```json
