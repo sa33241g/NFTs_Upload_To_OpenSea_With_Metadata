@@ -15,6 +15,12 @@ git clone https://github.com/nftdevs/NFTs_Upload_To_OpenSea_With_Metadata.git
 pip install -r requirements.txt
 ```
 
+or 
+
+```
+python3 -m pip install -r requirements.txt
+```
+
 * ### Configuration of bot:
 
   * Download and install [Google Chrome](https://www.google.com/intl/en_en/chrome/).
