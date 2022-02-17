@@ -197,15 +197,16 @@ class Webdriver:
         options.add_argument("--lang=en-US")  # Set webdriver language
         options.add_experimental_option(  # to English. - 2 methods.
             'prefs', {'intl.accept_languages': 'en,en_US'})
-        driver = webdriver.Chrome(service=Service( # DeprecationWarning using
-            CDM().install()), options=options)  # executable_path.
+        options.add_experimental_option('excludeSwitches', ['enable-logging'])   
+        driver = webdriver.Chrome(service=Service(  # DeprecationWarning using
+            CDM(log_level=0).install()), options=options)  # executable_path.
         driver.maximize_window()  # Maximize window to reach all elements.
         return driver
 
     def clickable(self, element: str) -> None:
         """Click on an element if it's clickable using Selenium."""
         try:
-            WDW(self.driver, 10).until(EC.element_to_be_clickable(
+            WDW(self.driver, 5).until(EC.element_to_be_clickable(
                 (By.XPATH, element))).click()
         except Exception:  # Some buttons need to be visible to be clickable,
             self.driver.execute_script(  # so JavaScript can bypass this.
@@ -213,7 +214,7 @@ class Webdriver:
 
     def visible(self, element: str):
         """Check if an element is visible using Selenium."""
-        return WDW(self.driver, 10).until(
+        return WDW(self.driver, 5).until(
             EC.visibility_of_element_located((By.XPATH, element)))
 
     def send_keys(self, element: str, keys: str) -> None:
@@ -259,14 +260,15 @@ class Wallets:
         self.recovery_phrase = recovery_phrase  # Get the phrase.
         self.password = password  # Get the new/same password.
         self.wallet = wallet.lower().replace(' ', '_')  # Wallet user choice.
+        self.fails = 0  # Counter of fails during wallet connection.
+    
+    def login(self) -> bool:
+        """Connect to OpenSea using a specific wallet."""
+        return eval(f'self.{self.wallet}_login()')
 
     def contract(self) -> None:
         """Use the method of the wallet to sign the contract."""
         eval(f'self.{self.wallet}_contract()')
-
-    def login(self) -> None:
-        """Connect to OpenSea using a specific wallet."""
-        eval(f'self.{self.wallet}_login()')
 
     def metamask_login(self) -> None:
         """Login to the MetaMask extension."""
@@ -294,8 +296,15 @@ class Wallets:
             web.clickable('//*[contains(@class, "btn-primary")][position()=1]')
             print(f'{green}Logged to MetaMask.{reset}')
         except Exception:  # Failed - a web element is not accessible.
-            print(f'{red}Login to MetaMask failed, retrying...{reset}')
-            self.metamask_login()
+            self.fails += 1  # Increment the counter.
+            if self.fails < 2:  # Retry login to the wallet.
+                print(f'{red}Login to MetaMask failed. Retrying.{reset}')
+                self.metamask_login()
+            else:  # Too many fails.
+                self.fails = 0  # Reset the counter.
+                print(f'{red}Login to MetaMask failed. Restarting.{reset}')
+                web.driver.quit()  # Stop the webdriver.
+                return False
 
     def metamask_contract(self) -> None:
         """Sign a MetaMask contract to login to OpenSea."""
@@ -315,6 +324,7 @@ class OpenSea:
         """Get the password and the recovery_phrase from the text file."""
         self.login_url = 'https://opensea.io/login?referrer=%2Fasset%2Fcreate'
         self.create_url = 'https://opensea.io/asset/create'  # OpenSea URLs.
+        self.fails = 0  # Counter of fails during wallet connection.
 
     def login(self) -> None:
         """Login to OpenSea using MetaMask."""
@@ -345,9 +355,17 @@ class OpenSea:
                 WDW(web.driver, 15).until(EC.url_to_be(self.create_url))
                 print(f'{green}Logged to OpenSea.{reset}\n')
             except Exception:
-                print(f'{red}Login to OpenSea failed. Retrying.{reset}')
-                web.driver.refresh()  # Reload the page (is the login failed?).
-                self.login()  # Retry everything.
+                self.fails += 1  # Increment the counter.
+                if self.fails < 2:  # Retry login to the wallet.
+                    print(f'{red}Login to OpenSea failed. Retrying.{reset}')
+                    # Reload the page (is the login failed?).
+                    web.driver.refresh()
+                    self.login()  # Retry everything.
+                else:  # Too many fails.
+                    self.fails = 0  # Reset the counter.
+                    print(f'{red}Login to OpenSea failed. Restarting.{reset}')
+                    web.driver.quit()  # Stop the webdriver.
+                    return False
 
     def upload(self, number: int) -> bool:
         """Upload multiple NFTs automatically on OpenSea."""
