@@ -1,5 +1,8 @@
 # NFTs_Upload_To_OpenSea_With_Metadata
 
+FORK -> https://github.com/maximedrn/opensea-automatic-bulk-upload-and-sale
+Credits to @maximedrn
+
 ## Instructions:
 
 * ### Basic installation of Python for beginners:
